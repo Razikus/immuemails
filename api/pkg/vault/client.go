@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
 )
 
 type VaultClient struct {
@@ -24,17 +23,9 @@ func NewVaultClient(apikey string, baseurl string) *VaultClient {
 	}
 }
 
-func (v *VaultClient) AddToCollection(ledger string, collection string, formid string, form url.Values) (bool, error) {
-	flattened := make(map[string]interface{})
-	for key, value := range form {
-		if len(value) > 1 {
-			flattened[key] = value
-		} else {
-			flattened[key] = value[0]
-		}
-	}
-	flattened["__formid"] = formid
-	toBytes, err := json.Marshal(flattened)
+func (v *VaultClient) AddToCollection(ledger string, collection string, formid string, form map[string]interface{}) (bool, error) {
+	form["__formid"] = formid
+	toBytes, err := json.Marshal(form)
 	if err != nil {
 		log.Println("INVALID JSON FORM: " + err.Error())
 		return false, err

@@ -35,17 +35,15 @@ func main() {
 	}))
 	r.POST("/form/:formid", func(c *gin.Context) {
 		formid := c.Param("formid")
-		c.MultipartForm()
-
-		postForm := c.Request.PostForm
-		if postForm == nil {
+		var form map[string]interface{}
+		if err := c.ShouldBindJSON(&form); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"message": "invalid form",
 			})
 			return
 		}
 
-		added, err := vaultClient.AddToCollection(ledger, collectionName, formid, postForm)
+		added, err := vaultClient.AddToCollection(ledger, collectionName, formid, form)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"message": "invalid form",
