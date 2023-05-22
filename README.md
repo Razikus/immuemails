@@ -35,6 +35,7 @@ Check example/indexNoToast.html
 Add script src into your page and point formsurl into your URL with ending /form
 
 
+
 <script formsurl="http://localhost:8081/form" src="https://razikus.github.io/immuemails/script/scriptNoToast.js"></script>
 
 
@@ -62,6 +63,8 @@ Check example/index.html
 ```
 If you want to have toasts integrated (with iziToast):
 
+Add these scripts into <head> or <body>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
     integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
@@ -71,7 +74,7 @@ If you want to have toasts integrated (with iziToast):
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script formsurl="http://localhost:8081/form" src="https://razikus.github.io/immuemails/script/script.js"></script>
 
-Add id and onsubmit into form
+Add id and onsubmit tag into form
 
 
 <form id="form1" onsubmit="vaultFormSubmit(event, this)" method="post">
