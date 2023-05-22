@@ -22,6 +22,8 @@ function vaultFormSubmit (event, form) {
     let theUrl = formsurl + "/" + form.id;
     xmlhttp.open("POST", theUrl);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.send(JSON.stringify(form));
+    let data = new FormData(form);
+    let value = Object.fromEntries(data.entries());
+    xmlhttp.send(JSON.stringify(value));
     return false
 }
